@@ -19,6 +19,11 @@ def save_to_db(records, date, conn, retries=3, delay=1):
 
         except (OperationalError, InterfaceError, DatabaseError) as e:
             last_error = e
+            
+            try:
+                conn.rollback()
+            except Exception:
+                pass
 
             logger.error(
                 "DB error | date=%s attempt=%d/%d error=%s",
