@@ -52,8 +52,13 @@ def validate_record(record):
     
     if any(v is None for v in [client_id, time_seconds, product_id, quantity]):
         return None
+    
     if quantity < 0:
         logger.warning("Отрицательное quantity: %s", quantity)
+        return None
+
+    if quantity == 0:
+        logger.warning("Нулевое quantity: %s, запись пропущена", quantity)
         return None
     
     price = safe_float(record['price_per_item'], 'price_per_item')
