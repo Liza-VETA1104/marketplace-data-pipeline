@@ -18,6 +18,8 @@ CREATE TABLE IF NOT EXISTS sales (
 CREATE INDEX IF NOT EXISTS idx_sales_purchase_date ON sales(purchase_date);
 CREATE INDEX IF NOT EXISTS idx_sales_client_id ON sales(client_id);
 CREATE INDEX IF NOT EXISTS idx_sales_product_id ON sales(product_id);
+CREATE INDEX IF NOT EXISTS idx_sales_product_date ON sales(product_id, purchase_date);
+CREATE INDEX IF NOT EXISTS idx_sales_date_product ON sales(purchase_date, product_id);
 
 COMMENT ON TABLE sales IS 'Таблица продаж маркетплейса';
 COMMENT ON COLUMN sales.client_id IS 'Идентификатор клиента';
